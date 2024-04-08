@@ -68,6 +68,13 @@
     mode: "0710"
   become: true
 
+- name: "Docker | Ensure docker config directory exists"
+  ansible.builtin.file:
+    path: "{{ docker_config_dir }}"
+    state: directory
+    mode: "0710"
+  become: true
+
 - name: "Docker | Copy daemon.json"
   ansible.builtin.template:
     dest: "{{ docker_config_dir }}/daemon.json"
