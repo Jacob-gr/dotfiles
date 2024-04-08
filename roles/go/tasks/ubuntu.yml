@@ -95,7 +95,7 @@
 
     - name: "Go-Lang | Remove any current Go installations"
       ansible.builtin.file:
-        path: /usr/local/go
+        path: "{{ gopath }}"
         state: absent
       become: true
 
@@ -103,7 +103,7 @@
       ansible.builtin.copy:
         remote_src: true
         src: /tmp/go
-        dest: /usr/local/
+        dest: "{{ xdg_data_home }}"
         owner: "{{ host_user }}"
         group: "{{ host_user }}"
         force: true

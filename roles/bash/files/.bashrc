@@ -4,8 +4,19 @@ case $- in
     *) return;;
 esac
 
+export XDG_BIN_HOME="${XDG_BIN_HOME:-$HOME/.local/bin}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+
+export DOTFILES_DIR="$XDG_CACHE_HOME/.dotfiles"
+export GOPATH="$XDG_BIN_HOME"/go
+export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
+
 # Path to your oh-my-bash installation.
-export OSH="$HOME/.oh-my-bash"
+export OSH="$DOTFILES_DIR/.oh-my-bash"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -112,7 +123,6 @@ plugins=(
   kubectl
   progress
   xterm
-  zoxide
 )
 
 # Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -152,18 +162,18 @@ fi
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-if [[ -f "$HOME/.config/bash/.bash_private" ]]; then
-    source "$HOME/.config/bash/.bash_private"
+if [[ -f "$XDG_CONFIG_HOME/bash/.bash_private" ]]; then
+    source "$XDG_CONFIG_HOME/bash/.bash_private"
 fi
 
-for file in $HOME/.config/bash/*.sh; do
+for file in $XDG_CONFIG_HOME/bash/*.sh; do
   source "$file"
 done
 
 [ -f ~/.bash_lumen ] && source ~/.bash_lumen
 [ -f ~/.fzf.bash ]   && source ~/.fzf.bash
 
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$XDG_CONFIG_HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -171,5 +181,3 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -z "$TMUX" ]]; then
   if command -v neofetch &> /dev/null; then neofetch; fi
 fi
-#toilet "TechDufus" -F border:gay -f emboss2
-

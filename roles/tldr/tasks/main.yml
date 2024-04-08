@@ -24,7 +24,7 @@
 - name: "Tldr | Getting version information"
   ansible.builtin.shell:
     cmd: |
-      echo "v$(/usr/local/bin/tldr -v)"
+      echo "v$({{ xdg_bin_home }}/tldr -v)"
   register: current_tldr_version
   changed_when: false
   failed_when: false
@@ -72,7 +72,7 @@
 
     - name: "Tldr | Remove any current Tldr installations"
       ansible.builtin.file:
-        path: /usr/local/bin/tldr
+        path: "{{ xdg_bin_home }}/tldr"
         state: absent
       become: true
 
@@ -80,7 +80,7 @@
       ansible.builtin.copy:
         remote_src: true
         src: /tmp/tldr
-        dest: /usr/local/bin/
+        dest: "{{ xdg_bin_home }}"
         owner: "{{ host_user }}"
         group: "{{ host_user }}"
         force: true

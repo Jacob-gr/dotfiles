@@ -22,11 +22,11 @@
     mode: "0755"
     state: directory
   loop:
-    - ~/.config
-    - ~/.config/bpytop
+    - "{{ xdg_config_home }}"
+    - "{{ xdg_config_home }}/bpytop"
 
 - name: "Python | Copy bpytop config"
   ansible.builtin.copy:
     src: bpytop.conf
-    dest: ~/.config/bpytop/bpytop.conf
+    dest: "{{ xdg_config_home }}/bpytop/bpytop.conf"
     mode: "0644"

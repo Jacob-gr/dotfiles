@@ -66,7 +66,7 @@
 
     - name: "LAZYGIT | Remove any current lazygit installations"
       ansible.builtin.file:
-        path: /usr/local/bin/lazygit
+        path: "{{ xdg_bin_home }}/lazygit"
         state: absent
       become: true
 
@@ -74,7 +74,7 @@
       ansible.builtin.copy:
         remote_src: true
         src: /tmp/lazygit
-        dest: /usr/local/bin/
+        dest: "{{ xdg_bin_home }}"
         owner: "{{ host_user }}"
         group: "{{ host_user }}"
         force: true

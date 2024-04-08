@@ -1,0 +1,3 @@
+---
+docker_config_dir: "{{ xdg_config_home }}/docker"
+docker_state_dir: "{{ xdg_state_home }}/docker"

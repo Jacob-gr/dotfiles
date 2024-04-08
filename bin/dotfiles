@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # color codes
 RESTORE='\033[0m'
@@ -33,17 +34,33 @@ HOT="${ORANGE}\xF0\x9F\x94\xA5${NC}"
 WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
+# conts
+GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
 
-DOTFILES_LOG="$HOME/.dotfiles.log"
+ensure_dir_exists() {
+    local dir=$1
+    if [ ! -d "$dir" ]; then
+        echo "Creating directory: $dir"
+        mkdir -p "$dir"
+    fi
+}
+# Set XDG environment variables if not already set
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
-set -e
+# Ensure the directories exist
+ensure_dir_exists "$XDG_CONFIG_HOME"
+ensure_dir_exists "$XDG_CACHE_HOME"
+ensure_dir_exists "$XDG_DATA_HOME"
 
-# Paths
-CONFIG_DIR="$HOME/.config/dotfiles"
-VAULT_SECRET="$HOME/.ansible-vault/vault.secret"
-DOTFILES_DIR="$HOME/.dotfiles"
+CONFIG_DIR="$XDG_CONFIG_HOME/dotfiles"
+DOTFILES_LOG="$XDG_CACHE_HOME/.dotfiles.log"
+DOTFILES_DIR="$XDG_CACHE_HOME/.dotfiles"
+IS_FIRST_RUN="$XDG_CACHE_HOME/.dotfiles_run"
 SSH_DIR="$HOME/.ssh"
-IS_FIRST_RUN="$HOME/.dotfiles_run"
+VAULT_SECRET="$XDG_CONFIG_HOME/.ansible-vault/vault.secret"
+
 # _header colorize the given argument with spacing
 function _task {
   # if _task is called while a task was set, complete the previous
@@ -180,7 +197,7 @@ fi
 
 if ! [[ -d "$DOTFILES_DIR" ]]; then
   _task "Cloning repository"
-  _cmd "git clone --quiet https://github.com/TechDufus/dotfiles.git $DOTFILES_DIR"
+  _cmd "git clone --quiet $GIT_REPO $DOTFILES_DIR"
 else
   _task "Updating repository"
   _cmd "git -C $DOTFILES_DIR pull --quiet"

@@ -7,7 +7,6 @@ return {
   lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "jvgrootveld/telescope-zoxide",
     "nvim-tree/nvim-web-devicons",
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     'nvim-telescope/telescope-ui-select.nvim',

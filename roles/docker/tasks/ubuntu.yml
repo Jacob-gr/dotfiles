@@ -14,7 +14,7 @@
     state: present
   become: true
 
-- name: "Docker | Add Docker’s official GPG key"
+- name: "Docker | Add Docker's official GPG key"
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     keyring: /etc/apt/keyrings/docker.gpg
@@ -28,7 +28,7 @@
   failed_when: false
   check_mode: false
 
-- name: "Docker | Add Docker’s stable repository"
+- name: "Docker | Add Docker's stable repository"
   ansible.builtin.apt_repository:
     repo: deb [arch={{ dpkg_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     mode: "0644"
@@ -61,16 +61,16 @@
     name: "{{ ansible_env['USER'] }}"
   become: true
 
-- name: "Docker | Ensure docker data directory exists"
+- name: "Docker | Ensure docker state directory exists"
   ansible.builtin.file:
-    path: "{{  ansible_user_dir }}/.local/lib/docker"
+    path: "{{ docker_state_dir }}"
     state: directory
     mode: "0710"
   become: true
 
 - name: "Docker | Copy daemon.json"
   ansible.builtin.template:
-    dest: "/etc/docker/daemon.json"
+    dest: "{{ docker_config_dir }}/daemon.json"
     src: "daemon.json"
     mode: "0644"
   become: true
