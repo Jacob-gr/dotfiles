@@ -11,6 +11,5 @@
   ansible.builtin.apt:
     name:
       - jq
-      - git
     state: present
   become: true

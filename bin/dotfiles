@@ -128,6 +128,10 @@ function ubuntu_setup() {
     _task "Installing Python3 Watchdog"
     _cmd "pip3 install watchdog"
   fi
+  if ! dpkg -s git >/dev/null 2>&1; then
+    _task "Installing git"
+    _cmd "sudo apt-get install -y git"
+  fi
 }
 
 function arch_setup() {
