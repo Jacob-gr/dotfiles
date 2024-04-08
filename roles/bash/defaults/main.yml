@@ -1,0 +1,2 @@
+---
+ohmybash_dir: "{{ xdg_bin_home }}/.oh-my-bash"
