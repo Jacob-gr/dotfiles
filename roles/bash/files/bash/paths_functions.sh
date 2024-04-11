@@ -13,7 +13,7 @@ addToPathFront() {
 }
 
 change_background() {
-    dconf write /org/mate/desktop/background/picture-filename "'$HOME/anime/$(ls ~/anime| fzf)'"
+    dconf write /org/mate/desktop/background/picture-filename "'$HOME/bg/$(ls ~/bg| fzf)'"
 }
 
 die () {

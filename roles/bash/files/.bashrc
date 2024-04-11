@@ -16,11 +16,11 @@ export GOPATH="$XDG_BIN_HOME"/go
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 
 # Path to your oh-my-bash installation.
-export OSH="$DOTFILES_DIR/.oh-my-bash"
+# export OSH="$DOTFILES_DIR/.oh-my-bash"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="axin"
+# OSH_THEME="axin"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -31,7 +31,7 @@ OSH_THEME="axin"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
-DISABLE_UPDATE_PROMPT=true
+# DISABLE_UPDATE_PROMPT=true
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
@@ -46,7 +46,7 @@ DISABLE_UPDATE_PROMPT=true
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -77,53 +77,53 @@ export HISTCONTROL=ignoredups
 
 # To disable the uses of "sudo" by oh-my-bash, please set "false" to
 # this variable.  The default behavior for the empty value is "true".
-OMB_USE_SUDO=true
+# OMB_USE_SUDO=true
 
 # Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
 # Custom completions may be added to ~/.oh-my-bash/custom/completions/
 # Example format: completions=(ssh git bundler gem pip pip3)
 # Add wisely, as too many completions slow down shell startup.
-completions=(
-  docker
-  git
-  gh
-  go
-  helm
-  kubectl
-  ssh
-  system
-  terraform
-  kubectl
-  tmux
-  vault
-)
+# completions=(
+#   docker
+#   git
+#   gh
+#   go
+#   helm
+#   kubectl
+#   ssh
+#   system
+#   terraform
+#   kubectl
+#   tmux
+#   vault
+# )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
 # Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
 # Example format: aliases=(vagrant composer git-avh)
 # Add wisely, as too many aliases slow down shell startup.
-aliases=(
-  chmod
-  general
-  ls
-  misc
-  terraform
-)
+# aliases=(
+#   chmod
+#   general
+#   ls
+#   misc
+#   terraform
+# )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
 # Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  ansible
-  bashmarks
-  git
-  goenv
-  golang
-  kubectl
-  progress
-  xterm
-)
+# plugins=(
+#   ansible
+#   bashmarks
+#   git
+#   goenv
+#   golang
+#   kubectl
+#   progress
+#   xterm
+# )
 
 # Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
 # Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
@@ -132,7 +132,7 @@ plugins=(
 #      plugins+=(tmux-autoattach)
 #  fi
 
-source "$OSH"/oh-my-bash.sh
+# source "$OSH"/oh-my-bash.sh
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -141,11 +141,11 @@ source "$OSH"/oh-my-bash.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='nvim'
+# else
+#   export EDITOR='nvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -170,14 +170,14 @@ for file in $XDG_CONFIG_HOME/bash/*.sh; do
   source "$file"
 done
 
-[ -f ~/.bash_lumen ] && source ~/.bash_lumen
-[ -f ~/.fzf.bash ]   && source ~/.fzf.bash
+# [ -f ~/.bash_lumen ] && source ~/.bash_lumen
+# [ -f ~/.fzf.bash ]   && source ~/.fzf.bash
 
-export NVM_DIR="$XDG_CONFIG_HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$XDG_CONFIG_HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# if neofetch exists, run it
-if [[ -z "$TMUX" ]]; then
-  if command -v neofetch &> /dev/null; then neofetch; fi
-fi
+# # if neofetch exists, run it
+# if [[ -z "$TMUX" ]]; then
+#   if command -v neofetch &> /dev/null; then neofetch; fi
+# fi
