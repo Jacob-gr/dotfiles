@@ -1,0 +1,53 @@
+- name: Catppuccin Gnome | Check if Python 3 is available
+  command: python3 --version
+  register: python3_version
+  ignore_errors: true
+
+- name: Catppuccin Gnome | Fail if Python 3 is not available
+  fail:
+    msg: "Python 3 is not installed on this system."
+  when: python3_version.rc != 0
+
+- name: Check if GNOME Terminal is installed
+  command: which gnome-terminal
+  register: gnome_terminal_installed
+  ignore_errors: true
+
+- name: Catppuccin Gnome | Install GNOME Terminal
+  apt:
+    name: gnome-terminal
+    state: present
+  when: gnome_terminal_installed.rc != 0
+
+- name: Catppuccin Gnome | Download Catppuccin theme for GNOME Terminal
+  get_url:
+    url: https://raw.githubusercontent.com/catppuccin/gnome-terminal/main/install.py
+    dest: "{{ catpuccin_temp_dir }}"
+    mode: '0755'
+
+- name: Catppuccin Gnome | Install Catppuccin theme for GNOME Terminal
+  command: "{{ catpuccin_temp_dir }}"
+  become: true
+  become_user: "{{ ansible_user_id }}"
+
+- name: Catppuccin Gnome | Extract the 'uuids' dictionary from the Python file
+  command: >
+    python3 -c "import ast; with open('{{ catpuccin_temp_dir }}', 'r') as file:
+      tree = ast.parse(file.read(), mode='exec');
+      result = {node.targets[0].id: ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign) and node.targets[0].id == 'uuids'};
+      print(result['uuids'])"
+  register: uuid_output
+
+- name: Catppuccin Gnome | Set UUID variables
+  set_fact:
+    mocha: "{{ uuid_output.stdout | from_json | json_query('mocha') }}"
+    macchiato: "{{ uuid_output.stdout | from_json | json_query('macchiato') }}"
+    frappe: "{{ uuid_output.stdout | from_json | json_query('frappe') }}"
+    latte: "{{ uuid_output.stdout | from_json | json_query('latte') }}"
+
+- name: Catppuccin Gnome | Debugging output
+  debug:
+    msg: "Mocha UUID: {{ mocha }}, Macchiato UUID: {{ macchiato }}, Frappe UUID: {{ frappe }}, Latte UUID: {{ latte }}"
+
+- name: Catppuccin Gnome | Set Theme
+  command: gsettings set org.gnome.Terminal.ProfilesList default {{ mocha }}
