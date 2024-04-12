@@ -175,9 +175,9 @@ function update_ansible_galaxy() {
 
 function check_for_dev() {
   if [[ -v DOTFILES_DEV ]]; then
-    return true
+    return 0
   else
-    return false
+    return 1
   fi
 }
 
