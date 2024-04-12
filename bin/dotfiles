@@ -34,12 +34,6 @@ HOT="${ORANGE}\xF0\x9F\x94\xA5${NC}"
 WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
-# Check for Dev environment
-if [[ -v "${DOTFILES_DEV}" ]]; then
-  GIT_REPO="-b dev https://github.com/Jacob-gr/dotfiles.git"
-else
-  GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
-fi
 
 ensure_dir_exists() {
     local dir=$1
@@ -168,7 +162,7 @@ function arch_setup() {
   _cmd "sudo localectl set-locale LANG=en_US.UTF-8"
 }
 
-update_ansible_galaxy() {
+function update_ansible_galaxy() {
   local os=$1
   local os_requirements=""
   _task "Updating Ansible Galaxy"
@@ -179,9 +173,21 @@ update_ansible_galaxy() {
   _cmd "ansible-galaxy install -r $DOTFILES_DIR/requirements/common.yml $os_requirements"
 }
 
+function check_for_dev() {
+  if [[ -v DOTFILES_DEV ]]; then
+    return true
+  else
+    return false
+  fi
+}
+
 # Check for Dev environment
-if [[ -v "${DOTFILES_DEV}" ]]; then
-  _task "RUNNING IN DEV BRANCH!"
+if check_for_dev; then
+  _task "RUNNING FROM DEV BRANCH!"
+  GIT_REPO="-b dev https://github.com/Jacob-gr/dotfiles.git"
+else
+  _task "RUNNING FROM MASTER BRANCH!"
+  GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
 fi
 
 source /etc/os-release
