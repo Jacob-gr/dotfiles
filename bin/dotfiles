@@ -35,7 +35,11 @@ WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
 # conts
-GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
+if [[ -z "${DOTFILES_DEV}" ]]; then
+  GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
+else
+  GIT_REPO="-b dev https://github.com/Jacob-gr/dotfiles.git"
+fi
 
 ensure_dir_exists() {
     local dir=$1
@@ -69,7 +73,7 @@ function _task {
   fi
   # set new task title and print
   TASK=$1
-  printf "${LBLACK} [ ]  ${TASK} \n${LRED}"
+  printf "${LCYAN} [ ]  ${TASK} \n${LRED}"
 }
 
 # _cmd performs commands with error checking
