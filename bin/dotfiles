@@ -34,11 +34,11 @@ HOT="${ORANGE}\xF0\x9F\x94\xA5${NC}"
 WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
-# conts
-if [[ -z "${DOTFILES_DEV}" ]]; then
-  GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
-else
+# Check for Dev environment
+if [[ -v "${DOTFILES_DEV}" ]]; then
   GIT_REPO="-b dev https://github.com/Jacob-gr/dotfiles.git"
+else
+  GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
 fi
 
 ensure_dir_exists() {
@@ -178,6 +178,11 @@ update_ansible_galaxy() {
   fi
   _cmd "ansible-galaxy install -r $DOTFILES_DIR/requirements/common.yml $os_requirements"
 }
+
+# Check for Dev environment
+if [[ -v "${DOTFILES_DEV}" ]]; then
+  _task "RUNNING IN DEV BRANCH!"
+fi
 
 source /etc/os-release
 _task "Loading Setup for detected OS: $ID"
