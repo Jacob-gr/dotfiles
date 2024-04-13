@@ -1,2 +1,8 @@
 ---
 catpuccin_temp_dir: /tmp/catppuccin.py
+
+# Pulled from uuids in https://github.com/catppuccin/gnome-terminal/blob/main/install.py
+mocha: "95894cfd-82f7-430d-af6e-84d168bc34f5"
+macchiato: "5083e06b-024e-46be-9cd2-892b814f1fc8"
+frappe: "71a9971e-e829-43a9-9b2f-4565c855d664"
+latte: "de8a9081-8352-4ce4-9519-5de655ad9361"

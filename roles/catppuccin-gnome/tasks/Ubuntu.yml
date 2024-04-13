@@ -30,24 +30,5 @@
   become: true
   become_user: "{{ ansible_user_id }}"
 
-- name: Catppuccin Gnome | Extract the 'uuids' dictionary from the Python file
-  command: >
-    python3 -c "import ast; with open('{{ catpuccin_temp_dir }}', 'r') as file:
-      tree = ast.parse(file.read(), mode='exec');
-      result = {node.targets[0].id: ast.literal_eval(node.value) for node in tree.body if isinstance(node, ast.Assign) and node.targets[0].id == 'uuids'};
-      print(result['uuids'])"
-  register: uuid_output
-
-- name: Catppuccin Gnome | Set UUID variables
-  set_fact:
-    mocha: "{{ uuid_output.stdout | from_json | json_query('mocha') }}"
-    macchiato: "{{ uuid_output.stdout | from_json | json_query('macchiato') }}"
-    frappe: "{{ uuid_output.stdout | from_json | json_query('frappe') }}"
-    latte: "{{ uuid_output.stdout | from_json | json_query('latte') }}"
-
-- name: Catppuccin Gnome | Debugging output
-  debug:
-    msg: "Mocha UUID: {{ mocha }}, Macchiato UUID: {{ macchiato }}, Frappe UUID: {{ frappe }}, Latte UUID: {{ latte }}"
-
 - name: Catppuccin Gnome | Set Theme
   command: gsettings set org.gnome.Terminal.ProfilesList default {{ mocha }}
