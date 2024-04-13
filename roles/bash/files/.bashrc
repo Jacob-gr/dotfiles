@@ -15,6 +15,8 @@ export DOTFILES_DIR="$XDG_CACHE_HOME/.dotfiles"
 export GOPATH="$XDG_BIN_HOME"/go
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 
+export TMUX_PLUGIN_MANAGER_PATH="${XDG_CACHE_HOME:-$HOME/.cache}/tmux/plugins"
+
 export PS1='\[\e[32m\]\u@\h\[\e[m\]:\w\$ '
 
 # Path to your oh-my-bash installation.
