@@ -1,19 +1,19 @@
-- name: VS Code | Check if Microsoft GPG key is installed
-  become: true
-  command: apt-key list | grep "Microsoft (Release signing)"
-  register: gpg_key_check
-  changed_when: false
-  ignore_errors: true
+# - name: VS Code | Check if Microsoft GPG key is installed
+#   become: true
+#   command: apt-key list | grep "Microsoft (Release signing)"
+#   register: gpg_key_check
+#   changed_when: false
+#   ignore_errors: true
 
-- name: VS Code | Create APT keyrings dir
-  become: true
-  ansible.builtin.file:
-    path: '/etc/apt/keyrings'
-    state: directory
-    mode: 'u=rwx,go=rx'
-  when: gpg_key_check.rc != 0
+# - name: VS Code | Create APT keyrings dir
+#   become: true
+#   ansible.builtin.file:
+#     path: '/etc/apt/keyrings'
+#     state: directory
+#     mode: 'u=rwx,go=rx'
+#   when: gpg_key_check.rc != 0
 
-- name: VS Code | Install key (apt)
+- name: VS Code | Install Microsoft key
   become: true
   ansible.builtin.get_url:
     url: 'https://packages.microsoft.com/keys/microsoft.asc'
