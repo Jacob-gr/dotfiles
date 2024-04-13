@@ -7,7 +7,7 @@
     autoclean: true
   become: true
 
-- name: "System | {{ ansible_distribution }} | Install"
+- name: "System | {{ ansible_distribution }} | Install Packages"
   ansible.builtin.apt:
     name:
       - jq
