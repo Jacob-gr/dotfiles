@@ -16,5 +16,5 @@
   become: true
 
 - name: "System | {{ ansible_distribution }} | Prefer Dark Theme"
-  ansible.builtin.command: gsettings set org.gnome.shell.ubuntu color-scheme prefer-dark
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 
