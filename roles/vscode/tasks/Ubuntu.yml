@@ -1,0 +1,56 @@
+- name: VS Code | Import Microsoft GPG key
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: VS Code | Add VS Code repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] http://packages.microsoft.com/repos/code stable main
+    state: present
+    update_cache: yes
+
+- name: VS Code | Check if VS Code is installed
+  command: dpkg -s code
+  register: vscode_check
+  ignore_errors: true
+  changed_when: false
+
+- name: VS Code | Install VS Code
+  ansible.builtin.apt:
+    name: code
+    state: latest
+    update_cache: yes
+  when: vscode_check.rc != 0
+
+- name: VS Code | Display installation status
+  debug:
+    msg: "VS Code installation status: already installed."
+  when: vscode_check.rc == 0
+
+- name: VS Code | Display installation status
+  debug:
+    msg: "VS Code was not installed, but now it is."
+  when: vscode_check.rc != 0
+
+- name: VS Code | Install extensions
+  gantsign.visual-studio-code-extensions:
+    users:
+      - username:  "{{ ansible_user_id }}"
+        visual_studio_code_extensions:
+          - catppuccin.catppuccin-vsc
+          - catppuccin.catppuccin-vsc-icons
+          - oderwat.indent-rainbow
+          - ms-vscode.powershell
+          - ms-azuretools.vscode-docker
+          - redhat.ansible
+          - ms-python.python
+          - streetsidesoftware.code-spell-checker
+          - asciidoctor.asciidoctor-vscode
+          - ms-vscode-remote.remote-containers
+          - hashicorp.hcl
+          - hashicorp.terraform
+          - wholroyd.jinja
+          - ms-toolsai.jupyter
+          - mechatroner.rainbow-csv
+          - redhat.vscode-xml
+          - redhat.vscode-yaml
