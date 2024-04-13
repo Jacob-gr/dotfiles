@@ -185,9 +185,13 @@ function check_for_dev() {
 if check_for_dev; then
   _task "RUNNING FROM DEV BRANCH!"
   GIT_REPO="-b dev https://github.com/Jacob-gr/dotfiles.git"
+  GIT_CLONE="git clone --quiet $GIT_REPO $DOTFILES_DIR"
+  GIT_UPDATE="git -C $DOTFILES_DIR pull origin dev:dev --quiet"
 else
   _task "RUNNING FROM MASTER BRANCH!"
   GIT_REPO="https://github.com/Jacob-gr/dotfiles.git"
+  GIT_CLONE="git clone --quiet $GIT_REPO $DOTFILES_DIR"
+  GIT_UPDATE="git -C $DOTFILES_DIR pull main:main --quiet"
 fi
 
 source /etc/os-release
@@ -216,10 +220,10 @@ fi
 
 if ! [[ -d "$DOTFILES_DIR" ]]; then
   _task "Cloning repository"
-  _cmd "git clone --quiet $GIT_REPO $DOTFILES_DIR"
+  _cmd "$GIT_CLONE"
 else
   _task "Updating repository"
-  _cmd "git -C $DOTFILES_DIR pull --quiet"
+  _cmd "$GIT_UPDATE"
 fi
 
 pushd "$DOTFILES_DIR" 2>&1 > /dev/null
