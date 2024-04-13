@@ -16,7 +16,7 @@ default_roles:
   ### - k9s
   ### - kwctl
   # - lazygit
-  # - lsd
+  - lsd
   # - lua
   - nala
   # - ncdu
