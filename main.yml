@@ -38,6 +38,7 @@
     - { role: catppuccin-gnome }
     - { role: fonts-nerd }
     - { role: lsd }
+    - { role: tldr }
     - { role: nala, tags: ['nala']}
     - { role: vscode, tags: ['vscode']}
     - { role: tmux, tags: ['tmux']}
