@@ -16,7 +16,7 @@
 - name: "Tmux | Configure tmux"
   ansible.builtin.copy:
     src: tmux
-    dest: "{{ xdg_cache_home }}"
+    dest: "{{ xdg_config_home }}"
     mode: "0644"
     directory_mode: "0755"
     force: true
