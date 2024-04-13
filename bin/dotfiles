@@ -87,7 +87,7 @@ function _cmd {
   while read line; do
     printf "      ${line}\n"
   done < $DOTFILES_LOG
-  printf "\n"
+  printf "\n${RESTORE}"
   # remove log file
   rm $DOTFILES_LOG
   # exit installation
