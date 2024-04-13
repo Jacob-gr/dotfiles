@@ -39,6 +39,7 @@
     - { role: fonts-nerd }
     - { role: lsd }
     - { role: nala, tags: ['nala']}
+    - { role: vscode, tags: ['vscode']}
 
   # tasks:
   #   - name: Set roles
