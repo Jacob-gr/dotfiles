@@ -88,3 +88,8 @@
       become: true
       notify:
         - Remove extracted Tldr directory
+
+    - name: "Tldr | Update tldr"
+      ansible.builtin.shell:
+        cmd: "{{ xdg_bin_home }}/tldr --update"
+      become: true
