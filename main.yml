@@ -46,7 +46,7 @@
     - { role: catppuccin-gnome }
     - { role: fonts-nerd }
     - { role: lsd }
-    - { role: nala }
+    - { role: nala, tags: ['nala']}
 
   # roles:
   #   - { role: system, tags: ['always'] }
