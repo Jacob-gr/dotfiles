@@ -20,7 +20,7 @@
     dest: '/etc/apt/keyrings/'
     mode: 'u=rw,go=r'
     force: true
-  when: gpg_key_check.rc != 0
+  # when: gpg_key_check.rc != 0
 
 - name: VS Code | Check if VS Code repo is installed
   become: true
