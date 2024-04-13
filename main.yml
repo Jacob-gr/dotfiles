@@ -46,7 +46,7 @@
     - { role: catppuccin-gnome, tags: ['always'] }
     - { role: fonts-nerd, tags: ['always'] }
     - { role: lsd, tags: ['always'] }
-    - { role: nala, tags: ['always', 'nala'] }
+    - { role: nala }
 
   # tasks:
   #   - name: Set roles
