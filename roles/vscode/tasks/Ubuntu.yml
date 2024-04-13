@@ -35,23 +35,24 @@
 - name: VS Code | Install extensions
   ansible.builtin.include_role:
     name: gantsign.visual-studio-code
-  users:
-    - username:  "{{ ansible_user_id }}"
-      visual_studio_code_extensions:
-        - catppuccin.catppuccin-vsc
-        - catppuccin.catppuccin-vsc-icons
-        - oderwat.indent-rainbow
-        - ms-vscode.powershell
-        - ms-azuretools.vscode-docker
-        - redhat.ansible
-        - ms-python.python
-        - streetsidesoftware.code-spell-checker
-        - asciidoctor.asciidoctor-vscode
-        - ms-vscode-remote.remote-containers
-        - hashicorp.hcl
-        - hashicorp.terraform
-        - wholroyd.jinja
-        - ms-toolsai.jupyter
-        - mechatroner.rainbow-csv
-        - redhat.vscode-xml
-        - redhat.vscode-yaml
+  vars:
+    users:
+      - username:  "{{ ansible_user_id }}"
+        visual_studio_code_extensions:
+          - catppuccin.catppuccin-vsc
+          - catppuccin.catppuccin-vsc-icons
+          - oderwat.indent-rainbow
+          - ms-vscode.powershell
+          - ms-azuretools.vscode-docker
+          - redhat.ansible
+          - ms-python.python
+          - streetsidesoftware.code-spell-checker
+          - asciidoctor.asciidoctor-vscode
+          - ms-vscode-remote.remote-containers
+          - hashicorp.hcl
+          - hashicorp.terraform
+          - wholroyd.jinja
+          - ms-toolsai.jupyter
+          - mechatroner.rainbow-csv
+          - redhat.vscode-xml
+          - redhat.vscode-yaml
