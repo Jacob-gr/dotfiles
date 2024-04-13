@@ -15,6 +15,8 @@ export DOTFILES_DIR="$XDG_CACHE_HOME/.dotfiles"
 export GOPATH="$XDG_BIN_HOME"/go
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 
+export PS1='\[\e[32m\]\u@\h\[\e[m\]:\w\$ '
+
 # Path to your oh-my-bash installation.
 # export OSH="$DOTFILES_DIR/.oh-my-bash"
 
