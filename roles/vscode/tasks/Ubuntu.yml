@@ -1,39 +1,26 @@
-# - name: VS Code | Check if Microsoft GPG key is installed
-#   become: true
-#   command: apt-key list | grep -q microsoft
-#   register: gpg_key_check
-#   changed_when: false
-#   ignore_errors: true
+- name: VS Code | Check if Microsoft GPG key is installed
+  become: true
+  command: apt-key list | grep "Microsoft (Release signing)"
+  register: gpg_key_check
+  changed_when: false
+  ignore_errors: true
 
-# - name: VS Code | Download Microsoft GPG key
-#   become: true
-#   ansible.builtin.get_url:
-#     url: https://packages.microsoft.com/keys/microsoft.asc
-#     dest: /tmp/microsoft.asc
-#     mode: '0644'
-#   when: gpg_key_check.rc != 0
+- name: VS Code | Create APT keyrings dir
+  become: true
+  ansible.builtin.file:
+    path: '/etc/apt/keyrings'
+    state: directory
+    mode: 'u=rwx,go=rx'
+  when: gpg_key_check.rc != 0
 
-# - name: VS Code | Import Microsoft GPG key into apt
-#   become: true
-#   ansible.builtin.apt_key:
-#     file: /tmp/microsoft.asc
-#     state: present
-#   when: gpg_key_check.rc != 0
-
-# - name: VS Code | Remove temporary Microsoft GPG key file
-#   become: true
-#   ansible.builtin.file:
-#     path: /tmp/microsoft.asc
-#     state: absent
-#   when: gpg_key_check.rc != 0
-
-# - name: VS Code | Add VS Code repository
-#   become: true
-#   ansible.builtin.apt_repository:
-#     repo: deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main
-#     state: present
-#     filename: vscode
-#     mode: '0644'
+- name: VS Code | Install key (apt)
+  become: true
+  ansible.builtin.get_url:
+    url: 'https://packages.microsoft.com/keys/microsoft.asc'
+    dest: '/etc/apt/keyrings/'
+    mode: 'u=rw,go=r'
+    force: true
+  when: gpg_key_check.rc != 0
 
 - name: VS Code | Check if VS Code repo is installed
   become: true
@@ -43,30 +30,7 @@
   failed_when: repo_check.rc != 0 and 'No such file or directory' not in repo_check.stderr
   ignore_errors: true
 
-# - name: Install dependencies (apt)
-#   become: true
-#   ansible.builtin.apt:
-#     name:
-#       - ca-certificates
-#       - apt-transport-https
-#     state: present
-
-- name: VS Code | Create APT keyrings dir
-  become: true
-  ansible.builtin.file:
-    path: '/etc/apt/keyrings'
-    state: directory
-    mode: 'u=rwx,go=rx'
-
-- name: VS Code | Install key (apt)
-  become: true
-  ansible.builtin.get_url:
-    url: 'https://packages.microsoft.com/keys/microsoft.asc'
-    dest: '/etc/apt/keyrings/'
-    mode: 'u=rw,go=r'
-    force: true
-
-- name: VS Code | Install VS Code repo (apt)
+- name: VS Code | Install VS Code repo
   become: true
   ansible.builtin.apt_repository:
     repo: >-
