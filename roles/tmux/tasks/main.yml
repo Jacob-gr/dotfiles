@@ -11,12 +11,12 @@
 - name: "Tmux | Install TPM"
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ xdg_config_home }}/tmux/plugins/tpm"
+    dest: "{{ xdg_cache_home }}/tmux/plugins/tpm"
 
 - name: "Tmux | Configure tmux"
   ansible.builtin.copy:
     src: tmux
-    dest: "{{ xdg_config_home }}"
+    dest: "{{ xdg_cache_home }}"
     mode: "0644"
     directory_mode: "0755"
     force: true
