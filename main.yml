@@ -31,10 +31,10 @@
       ansible.builtin.import_tasks: pre_tasks/whoami.yml
       tags:
         - always
-        
+
   roles:
     - { role: system, tags: ['always'] }
-    - { role: bash, tags: ['always'] }
+    - { role: bash, tags: ['always', 'bash'] }
     - { role: catppuccin-gnome, tags: ['always'] }
     - { role: fonts-nerd, tags: ['always'] }
     - { role: lsd, tags: ['always'] }
