@@ -19,11 +19,17 @@
 #   ansible.builtin.debug:
 #     var: fonts_to_install
 
+- name: Fonts-Nerd | Create fonts directory
+  ansible.builtin.file:
+    path: "{{ xdg_data_home }}/fonts"
+    state: directory
+    present: yes
+
 - name: Fonts-Nerd | Install Fonts
   vars:
     files_to_download:
       - url: "https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/UbuntuMono/Regular/UbuntuMonoNerdFontMono-Regular.ttf"
-        dest: "{{ xdg_cache_home }}/fonts/UbuntuMonoNerdFontMono-Regular.ttf"
+        dest: "{{ xdg_data_home }}/fonts/UbuntuMonoNerdFontMono-Regular.ttf"
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "{{ item.dest }}"
