@@ -16,6 +16,7 @@
   changed_when: false
 
 - name: VS Code | Install VS Code
+  become: true
   ansible.builtin.apt:
     name: code
     state: latest
