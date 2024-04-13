@@ -32,21 +32,21 @@
       tags:
         - always
 
-  roles:
-    - { role: system, tags: ['system'] }
-    - { role: bash, tags: ['bash'] }
-    - { role: catppuccin-gnome, tags: ['theme'] }
-    - { role: fonts-nerd, tags: ['fonts'] }
-    - { role: lsd, tags: ['lsd'] }
-    - { role: nala, tags: ['nala'] }
-
   # roles:
-  #   - { role: system, tags: ['always'] }
-  #   - { role: bash, tags: ['always', 'bash'] }
-  #   - { role: catppuccin-gnome, tags: ['always'] }
-  #   - { role: fonts-nerd, tags: ['always'] }
-  #   - { role: lsd, tags: ['always'] }
-  #   - { role: nala, tags: ['always'] }
+  #   - { role: system, tags: ['system'] }
+  #   - { role: bash, tags: ['bash'] }
+  #   - { role: catppuccin-gnome, tags: ['theme'] }
+  #   - { role: fonts-nerd, tags: ['fonts'] }
+  #   - { role: lsd, tags: ['lsd'] }
+  #   - { role: nala, tags: ['nala'] }
+
+  roles:
+    - { role: system, tags: ['always'] }
+    - { role: bash, tags: ['always', 'bash'] }
+    - { role: catppuccin-gnome, tags: ['always'] }
+    - { role: fonts-nerd, tags: ['always'] }
+    - { role: lsd, tags: ['always'] }
+    - { role: nala, tags: ['always'] }
 
   # tasks:
   #   - name: Set roles

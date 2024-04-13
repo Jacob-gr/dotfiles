@@ -235,3 +235,17 @@ For Example: Running the tmux tag with verbosity
 ```bash
 dotfiles -t tmux -vvv
 ```
+
+## My Usage (Doc WIP)
+
+To run from the DEV branch:
+
+```bash
+DOTFILES_DEV=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jacob-gr/dotfiles/dev/bin/dotfiles)"
+```
+
+To run a specific command from the DEV branch:
+
+```bash
+DOTFILES_DEV=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jacob-gr/dotfiles/dev/bin/dotfiles)" -- --tags bash
+```
