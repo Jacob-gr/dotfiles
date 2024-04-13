@@ -89,6 +89,13 @@ git_user_email: "none@home.arpa"
 
 flatpak_packages:
   - md.obsidian.Obsidian
+  - com.calibre_ebook.calibre
+  - com.discordapp.Discord
+  - com.getpostman.Postman
+  - com.github.tchx84.Flatseal
+  - com.logseq.Logseq
+  - io.github.finefindus.Hieroglyphic
+  - net.ankiweb.Anki
 
 k8s:
   repo_version: "v1.26"

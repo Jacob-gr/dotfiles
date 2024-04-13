@@ -1,6 +1,6 @@
 ---
 - name: "Flatpak | Install flatpak"
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: flatpak
     state: present
   become: true
@@ -11,3 +11,10 @@
     flatpakrepo_url: "https://flathub.org/repo/flathub.flatpakrepo"
     state: present
   become: true
+
+- name: "Flatpak | Install flatpak packages"
+  community.general.flatpak:
+    name: "{{ item }}"
+    state: present
+  become: true
+  loop: "{{ flatpak_packages }}"
