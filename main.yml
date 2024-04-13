@@ -43,6 +43,7 @@
     - { role: vscode, tags: ['vscode']}
     - { role: tmux, tags: ['tmux']}
     - { role: lazyvim, tags: ['lazyvim']}
+    - { role: lazygit, tags: ['lazygit']}
     # - { role: neovim, tags: ['neovim']}
 
   # tasks:
