@@ -41,6 +41,7 @@
     - { role: nala, tags: ['nala']}
     - { role: vscode, tags: ['vscode']}
     - { role: tmux, tags: ['tmux']}
+    - { role: lazyvim, tags: ['lazyvim']}
     # - { role: neovim, tags: ['neovim']}
 
   # tasks:

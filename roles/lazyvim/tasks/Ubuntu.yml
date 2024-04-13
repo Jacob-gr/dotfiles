@@ -1,0 +1,35 @@
+- name: "Neovim | {{ ansible_distribution }} | Dependencies"
+  ansible.builtin.apt:
+    name:
+      - cmake
+      - curl
+      - pkg-config
+      - libtool
+      - unzip
+      - ansible-lint
+      - ripgrep
+    state: present
+  become: true
+
+- name: "Neovim | {{ ansible_distribution }} | Install"
+  ansible.builtin.apt_repository:
+    repo: ppa:neovim-ppa/unstable
+    state: present
+  become: true
+
+- name: "Neovim | {{ ansible_distribution }} | Install Neovim"
+  ansible.builtin.apt:
+    name:
+      - neovim
+    state: present
+  become: true
+
+- name: "Neovim | {{ ansible_distribution }} | Install Lazy Vim"
+  ansible.builtin.git:
+    repo: https://github.com/LazyVim/starter
+    dest: "{{ xdg_config_home }}/nvim"
+
+- name: "Neovim | {{ ansible_distribution }} | Remove Lazy Vim Git Repository"
+  ansible.builtin.file:
+    path: "{{ xdg_config_home }}/nvim/.git"
+    state: absent
