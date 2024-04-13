@@ -36,8 +36,8 @@
 - name: VS Code | Install extensions
   ansible.builtin.command: "code --install-extension {{ item }}"
   with_items:
-    - catppuccino.catppuccino-vscode
-    - catppuccino.catppuccino-vscode
+    - catppuccin.catppuccin-vsc
+    - catppuccin.catppuccin-vsc-icons
     - oderwat.indent-rainbow
     - ms-vscode.powershell
     - ms-azuretools.vscode-docker
