@@ -1,13 +1,25 @@
-- name: VS Code | Import Microsoft GPG key
-  ansible.builtin.apt_key:
+- name: VS Code | Download Microsoft GPG key
+  ansible.builtin.get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /tmp/microsoft.asc
+    mode: '0644'
+
+- name: VS Code | Import Microsoft GPG key into apt
+  ansible.builtin.apt_key:
+    file: /tmp/microsoft.asc
     state: present
+
+- name: VS Code | Remove temporary Microsoft GPG key file
+  ansible.builtin.file:
+    path: /tmp/microsoft.asc
+    state: absent
 
 - name: VS Code | Add VS Code repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
+    repo: deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main
     state: present
-    update_cache: yes
+    filename: vscode
+    mode: '0644'
 
 - name: VS Code | Check if VS Code is installed
   command: dpkg -s code
