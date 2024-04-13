@@ -23,7 +23,7 @@
   ansible.builtin.file:
     path: "{{ xdg_data_home }}/fonts"
     state: directory
-    permission: "0755"
+    mode: "0755"
 
 - name: Fonts-Nerd | Install Fonts
   vars:
