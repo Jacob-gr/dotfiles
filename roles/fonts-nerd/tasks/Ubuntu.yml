@@ -1,0 +1,29 @@
+---
+- name: Fonts-Nerd | Pull from git
+  ansible.builtin.git:
+    repo: "https://github.com/ryanoasis/nerd-fonts.git"
+    dest: "{{ xdg_cache_home }}/nerd-fonts"
+    depth: 1
+    force: yes
+
+- name: Fonts-Nerd | Selecting fonts to install
+  ansible.builtin.find:
+    recurse: yes
+    use_regex: yes
+    paths: "{{ xdg_cache_home }}/nerd-fonts/patched-fonts"
+    patterns:
+      - '^.*?((?!Windows).)*?\.ttf$'
+  register: fonts_to_install
+
+- name: Fonts-Nerd DEBUG | Fonts to install
+  ansible.builtin.debug:
+    var: fonts_to_install
+
+- name: Fonts-Nerd | Install fonts
+  ansible.builtin.copy:
+    dest: "{{ xdg_data_home }}fonts/{{ item.path | basename }}"
+    src: "{{ item.path }}"
+    remote_src: yes
+  loop: "{{ fonts_to_install.files }}"
+  notify:
+    - update font cache
