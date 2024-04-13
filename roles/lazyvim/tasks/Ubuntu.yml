@@ -24,12 +24,30 @@
     state: present
   become: true
 
-- name: "Neovim | {{ ansible_distribution }} | Install Lazy Vim"
-  ansible.builtin.git:
-    repo: https://github.com/LazyVim/starter
-    dest: "{{ xdg_config_home }}/nvim"
+# - name: "Neovim | {{ ansible_distribution }} | Copy Lazy Vim Configuration"
+#   ansible.builtin.copy:
+#     src: "{{ role_path }}/files"
+#     dest: "{{ xdg_config_home }}/nvim"
+#     mode: "0644"
+#     directory_mode: "0755"
+#     force: true
+#   with_items:
+#     - "lua"
+#     - "init.lua"
 
-- name: "Neovim | {{ ansible_distribution }} | Remove Lazy Vim Git Repository"
+- name: "Neovim | Create symlink to role files directory"
   ansible.builtin.file:
-    path: "{{ xdg_config_home }}/nvim/.git"
-    state: absent
+    src: "{{ role_path }}/files"
+    dest: "{{ xdg_config_home }}/nvim"
+    state: link
+    force: true
+
+# - name: "Neovim | {{ ansible_distribution }} | Install Lazy Vim"
+#   ansible.builtin.git:
+#     repo: https://github.com/LazyVim/starter
+#     dest: "{{ xdg_config_home }}/nvim"
+
+# - name: "Neovim | {{ ansible_distribution }} | Remove Lazy Vim Git Repository"
+#   ansible.builtin.file:
+#     path: "{{ xdg_config_home }}/nvim/.git"
+#     state: absent
