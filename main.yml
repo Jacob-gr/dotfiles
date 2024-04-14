@@ -47,6 +47,8 @@
     - { role: lazygit, tags: ['lazygit']}
     - { role: wireguard, tags: ['wireguard']}
     - { role: flatpak, tags: ['flatpak']}
+    - { role: npm, tags: ['npm']}
+    - { role: nvm, tags: ['nvm']}
     # - { role: neovim, tags: ['neovim']}
 
   # tasks:
