@@ -23,7 +23,7 @@
   register: default_profile
 
 - name: Fonts-Nerd | Set Font for Default Profile
-  ansible.builtin.command: gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:{{ default_profile.stdout }}/ font "UbuntuMono Nerd Font Mono 16"
+  ansible.builtin.command: gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:{{ default_profile.stdout }}/ font "UbuntuMono Nerd Font Mono 14"
 
 - name: Fonts-Nerd | Disable System Font for Default Profile
   ansible.builtin.command: gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:{{ default_profile.stdout }}/ use-system-font false

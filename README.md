@@ -251,9 +251,3 @@ DOTFILES_DEV=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Jacob-gr/
 ```
 
 ## TODO:
-
-- [ ] Fix npm to extract to ~/.local/bin
-- [ ] Change default console text size to 14
-- [ ] add fd-find apt package install
-- [ ] if installing firefox with apt, need `apt install ffmpeg` for certain videos. It must be bundled with Snap version
-
