@@ -29,8 +29,6 @@
   ansible.builtin.set_fact:
     nodejs_install_needed: true
   when:
-    # - nodejs_installed.rc == 0
-    # - nodejs_up_to_date.rc != 0
     - nodejs_up_to_date.stdout != nodejs_latest_version.stdout
 
 - name: "NPM | Install NodeJS"
@@ -63,28 +61,24 @@
       ansible.builtin.unarchive:
         src: /tmp/{{ nodejs_package_name }}.tar.xz
         dest: /tmp/{{ nodejs_package_name }}
-        remote_src: true
         extra_opts: "--strip-components=1"
 
     - name: "NPM | Copy NodeJS"
       ansible.builtin.copy:
         src: /tmp/{{ nodejs_package_name }}/bin/
-        dest: /usr/local/bin/
-        remote_src: true
-        mode: "0644"
-
-    - name: NPM | Ensure NodeJS Modules directory exists
-      ansible.builtin.file:
-        path: /usr/local/lib/node_modules
-        state: directory
+        dest: "{{ xdg_bin_home }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         mode: "0755"
 
-    - name: "NPM | Copy NodeJS Modules"
-      ansible.builtin.copy:
-        src: /tmp/{{ nodejs_package_name }}/lib/node_modules/
-        dest: /usr/local/lib/node_modules/*
-        remote_src: true
-        mode: "0644"
+    - name: NPM | Clear NodeJS Modules directory
+      ansible.builtin.file:
+        path: /usr/local/lib/node_modules/
+        state: absent
+
+    - name: "NPM | Move NodeJS Modules"
+      ansible.builtin.command: "mv -f /tmp/{{ nodejs_package_name }}/lib/node_modules/ /usr/local/lib/"
+
 
 # - name: "NPM | Install NPM Packages"
 #   community.general.npm:
